@@ -1,3 +1,4 @@
+import Moviecard from "@/components/Moviecard";
 import Searchbar from "@/components/Searchbar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -9,6 +10,7 @@ import {
   FlatList,
   Image,
   ScrollView,
+  StatusBar,
   Text,
   View,
 } from "react-native";
@@ -26,10 +28,13 @@ export default function Index() {
     })
   );
 
-  console.log(movies);
 
   return (
     <View className="flex-1 bg-primary h-full">
+      <StatusBar translucent
+        backgroundColor="transparent"
+        barStyle="light-content" 
+      />
       <Image source={images.bg} className="absolute w-full z-0" />
       <ScrollView
         className="flex-1 px-5"
@@ -60,7 +65,22 @@ export default function Index() {
                   Latest Movies
                 </Text>
 
-                {/* <FlatList data={movies}/> */}
+                <FlatList
+                  data={movies}
+                  renderItem={({ item }) => (
+                    <Moviecard {...item}/>
+                  )}
+                  keyExtractor={(item) => item.id.toString()}
+                  numColumns={3}
+                  columnWrapperStyle={{
+                    justifyContent: "flex-start",
+                    gap: 20,
+                    paddingRight: 5,
+                    marginBottom: 10,
+                  }}
+                  className="mt-2 pb-32"
+                  scrollEnabled={false}
+                />
               </>
             </View>
           </View>
