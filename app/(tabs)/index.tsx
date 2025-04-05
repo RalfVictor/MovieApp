@@ -31,7 +31,7 @@ export default function Index() {
 
   return (
     <View className="flex-1 bg-primary h-full">
-      <StatusBar translucent
+      <StatusBar hidden
         backgroundColor="transparent"
         barStyle="light-content" 
       />
@@ -59,6 +59,7 @@ export default function Index() {
               <Searchbar
                 onPress={() => router.push("/search")}
                 placeholder="Search For A Movie"
+                value="" onChangeText={()=>{}}
               />
               <>
                 <Text className="text-lg text-white font-bold mt-5 mb-3">

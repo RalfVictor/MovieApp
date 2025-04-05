@@ -3,7 +3,7 @@ export const TMDB_CONFIG = {
   API_KEY: process.env.EXPO_MOVIE_API_KEY,
   headers: {
     accept: "application/json",
-    Authorization: `Bearer ${process.env.EXPO_MOVIE_API_KEY}`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ODZkODMzNjFjOTVkOGU1OWViNWQxODA3MTljYTBjNCIsIm5iZiI6MTc0MzQ5NzQ5Mi4xMjcsInN1YiI6IjY3ZWJhOTE0MDNiYWJkY2VkMjdhYjFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VS9KwDXZJrcDk7sorwnR8vTdXRv-Y4B7jC2hdxvMWBU`,
   },
 };
 
@@ -20,7 +20,7 @@ export const fetchMovies = async ({ query }: { query: string }) => {
 
 
   if (!response.ok) {
-     throw new Error("Failed to Fetch Movies", response.statusText);
+     //throw new Error("Failed to Fetch Movies", response.statusText);
   }
 
   const data = await response.json();
