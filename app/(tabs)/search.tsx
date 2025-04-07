@@ -14,6 +14,7 @@ import Moviecard from "@/components/Moviecard";
 import { icons } from "@/constants/icons";
 import Searchbar from "@/components/Searchbar";
 import { useRouter } from "expo-router";
+import { updateSearchCount } from "@/Services/appWrite";
 
 const search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,6 +35,7 @@ const search = () => {
   );
 
   useEffect(() => {
+    updateSearchCount(searchQuery,movies[0]);
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
