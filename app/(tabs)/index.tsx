@@ -65,7 +65,7 @@ export default function Index() {
       />
       <Image
         source={images.bg}
-        className="absolute w-full h-full z-0"
+        className="flex-1 absolute w-full z-0"
         resizeMode="cover"
       />
 
