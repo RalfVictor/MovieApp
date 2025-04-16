@@ -14,19 +14,21 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
   //if record found of Search increment it. If not found then init it in database the put it as
   try {
     const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
-      Query.equal("searchTerm", query),
+      Query.equal("searchterm", query),
     ]);
     if (result.documents.length > 0) {
-      const existMovie = result.documents[0];
+      const existingMovie = result.documents[0];
       await database.updateDocument(
         DATABASE_ID,
         COLLECTION_ID,
-        existMovie.$id,
+        existingMovie.$id,
         {
-          count: existMovie.count + 1,
+          count: existingMovie.count + 1,
         }
       );
     } else {
+      //console.log(query);
+      //console.log(movie.title);
       await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
         searchterm: query,
         movie_id: movie.id,
@@ -38,5 +40,20 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+};
+
+export const getTrendingMovies = async (): Promise<
+  TrendingMovie[] | undefined
+> => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.limit(5),
+      Query.orderDesc("count"),
+    ]);
+    return result.documents as unknown as TrendingMovie[];
+  } catch (error) {
+    console.log(error);
+    return undefined;
   }
 };
